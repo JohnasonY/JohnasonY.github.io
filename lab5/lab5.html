@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>Title</title>
+
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../lab3/lab3.html">Lab3</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../lab4/lab4.html">Lab4</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./lab5.html">Lab5</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Game Deal</h1>
+            <p class="lead">Get game's deals on every platform based on your account preference.</p>
+        </div>
+    </div>
+
+    <div class="mx-auto p-2" style="width: 40%;">
+        <h1 class="display-5">Sign Up</h1>
+    </div>
+
+    <form id="RegistrationForm">
+        <div class="mx-auto p-2" style="width: 40%;">
+            <label for="fname" class="form-label">First Name</label> <input class="form-control form-control-lg" id="fname">
+            <span class="invalid message"></span><br>
+            <label for="lname" class="form-label">Last Name</label> <input class="form-control form-control-lg" id="lname">
+            <span class="invalid message"></span><br>
+            <label for="email" class="form-label">Email</label> <input class="form-control form-control-lg" id="email" placeholder="name@examle.com">
+            <span class="invalid message"></span><br>
+            <label for="password" class="form-label">Password</label> <input type="password" class="form-control form-control-lg" id="password">
+            <div id="passwordHelpBlock" class="form-text">
+                Your Password must have at least one '?' or '!'
+            </div>
+            <span class="invalid message"></span><br>
+
+            <label for="DOB" class="form-label">Date of Birth</label>
+            <div class="row" id="DOB">
+                 <div class="col">
+                     <label for="month" class="form-label"></label> <input class="form-control form-control-lg" id="month" placeholder="Month">
+                     <span class="invalid message"></span>
+                 </div>
+                <div class="col">
+                    <label for="day" class="form-label"></label> <input class="form-control form-control-lg" id="day" placeholder="Day">
+                    <span class="invalid message"></span>
+                </div>
+                <div class="col">
+                    <label for="year" class="form-label"></label> <input class="form-control form-control-lg" id="year" placeholder="Year">
+                    <span class="invalid message"></span>
+                </div>
+            </div>
+
+            <br>
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Finish</button>
+            </div>
+        </div>
+
+    </form>
+
+    <div class="mx-auto p-2" style="width: 40%;">
+        <div id="accountInfo"></div>
+    </div>
+
+    <script>
+        //verify first name
+        const firstName = document.getElementById("fname");
+        firstName.addEventListener("change", verifyFname);
+        function verifyFname(){
+            const span = firstName.nextElementSibling;
+            const fnameFormat = /^[A-Za-z]{1,20}$/;
+            if(!fnameFormat.test(firstName.value)){
+                span.style.color = "red";
+                span.innerHTML = "Must be alphabetic characters length between 1-20";
+                return false;
+            }
+            else{
+                span.style.color = "green";
+                span.innerHTML = "Valid";
+                return true;
+            }
+        }
+
+        //verify last name
+        const lastName = document.getElementById("lname");
+        lastName.addEventListener("change", verifyLname);
+        function verifyLname(){
+            const span = lastName.nextElementSibling;
+            const lnameFormat = /^[A-Za-z]{1,20}$/;
+            if(!lnameFormat.test(lastName.value)){
+                span.style.color = "red";
+                span.innerHTML = "Must be alphabetic characters length between 1-20";
+                return false;
+            }
+            else{
+                span.style.color = "green";
+                span.innerHTML = "Valid";
+                return true;
+            }
+        }
+
+        //verify email
+        const email = document.getElementById("email");
+        email.addEventListener("change", verifyEmail);
+        function verifyEmail(){
+            const span = email.nextElementSibling;
+            const emailFormat = /^.{1,20}@.{1,10}\.com$/;
+            if(!emailFormat.test(email.value)){
+                span.style.color = "red";
+                span.innerHTML = "Invalid Format";
+                return false;
+            }
+            else{
+                span.style.color = "green";
+                span.innerHTML = "Valid";
+                return true;
+            }
+        }
+
+        //verify password
+        const password = document.getElementById("password");
+        password.addEventListener("change", verifyPassword);
+        function verifyPassword(){
+            const span = password.nextElementSibling;
+            const passwordFormat = /[!?]/;
+            if(!passwordFormat.test(password.value)){
+                span.style.color = "red";
+                span.innerHTML = "at least one '?' or '!'";
+                return false;
+            }
+            else{
+                span.style.color = "green";
+                span.innerHTML = "Valid";
+                return true;
+            }
+        }
+
+        //verify month
+        const month = document.getElementById("month");
+        month.addEventListener("change", verifyMonth);
+        function verifyMonth(){
+            const span = month.nextElementSibling;
+            if(month.value >= 1 && month.value <= 12){
+                span.style.color = "green";
+                span.innerHTML = "Valid";
+                return true;
+            }
+            else{
+                span.style.color = "red";
+                span.innerHTML = "Invalid";
+                return false;
+            }
+        }
+
+        //verify day
+        const day = document.getElementById("day");
+        day.addEventListener("change", verifyDay);
+        function verifyDay(){
+            const span = day.nextElementSibling;
+            if(day.value >= 1 && day.value <= 31){
+                span.style.color = "green";
+                span.innerHTML = "Valid";
+                return true;
+            }
+            else{
+                span.style.color = "red";
+                span.innerHTML = "Invalid";
+                return false;
+            }
+        }
+
+        //verify year
+        const year = document.getElementById("year");
+        year.addEventListener("change", verifyYear);
+        function verifyYear(){
+            const span = year.nextElementSibling;
+            const currentYear = new Date().getFullYear();
+            if(year.value >= 1000 && year.value <= currentYear){
+                span.style.color = "green";
+                span.innerHTML = "Valid";
+                return true;
+            }
+            else{
+                span.style.color = "red";
+                span.innerHTML = "Invalid";
+                return false;
+            }
+        }
+
+        //verify submission
+        const form = document.getElementById("RegistrationForm");
+        form.addEventListener("submit", function (e){
+            if(!verifyFname()) e.preventDefault();
+            if(!verifyLname()) e.preventDefault();
+            if(!verifyEmail()) e.preventDefault();
+            if(!verifyPassword()) e.preventDefault();
+            if(!verifyMonth()) e.preventDefault();
+            if(!verifyDay()) e.preventDefault();
+            if(!verifyYear()) e.preventDefault();
+
+            if(verifyFname() && verifyLname() && verifyEmail() && verifyPassword() && verifyMonth() && verifyDay() && verifyYear()){
+                e.preventDefault();
+                alert("Registration Succeed!");
+
+                const User = {
+                    firstname: firstName.value,
+                    lastname: lastName.value,
+                    Email: email.value,
+                    Password: password.value,
+                    Month: month.value,
+                    Day: day.value,
+                    Year: year.value
+                };
+
+                const accountInfo = document.getElementById("accountInfo");
+                accountInfo.innerHTML = "<b>Your account information:</b><br>" +
+                    "First Name: " + User.firstname + "<br>" +
+                    "Last Name: " + User.lastname + "<br>" +
+                    "Email: " + User.Email + "<br>" +
+                    "Password: " + User.Password + "<br>" +
+                    "Date of Birth: " + User.Month + "/" + User.Day + "/" + User.Year;
+            }
+        })
+
+
+
+    </script>
+</body>
+</html>
