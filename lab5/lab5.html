@@ -50,41 +50,41 @@
 
     <form id="RegistrationForm">
         <div class="mx-auto p-2" style="width: 40%;">
-            <label for="fname" class="form-label">First Name</label> <input class="form-control form-control-lg" id="fname">
-            <span class="invalid message"></span><br>
-            <label for="lname" class="form-label">Last Name</label> <input class="form-control form-control-lg" id="lname">
-            <span class="invalid message"></span><br>
-            <label for="email" class="form-label">Email</label> <input class="form-control form-control-lg" id="email" placeholder="name@examle.com">
-            <span class="invalid message"></span><br>
-            <label for="password" class="form-label">Password</label> <input type="password" class="form-control form-control-lg" id="password">
+            <label for="fname" class="form-label"><h5>First Name</h5></label> <input class="form-control form-control-lg" id="fname">
+            <span>Must not empty</span><br>
+            <label for="lname" class="form-label"><h5>Last Name</h5></label> <input class="form-control form-control-lg" id="lname">
+            <span>Must not empty</span><br>
+            <label for="email" class="form-label"><h5>Email</h5></label> <input class="form-control form-control-lg" id="email" placeholder="name@examle.com">
+            <span>Must not empty</span><br>
+            <label for="password" class="form-label"><h5>Password</h5></label> <input type="password" class="form-control form-control-lg" id="password">
             <div id="passwordHelpBlock" class="form-text">
                 Your Password must have at least one '?' or '!'
             </div>
-            <span class="invalid message"></span><br>
 
-            <label for="DOB" class="form-label">Date of Birth</label>
+            <label for="DOB" class="form-label"><h5>Date of Birth</h5></label>
             <div class="row" id="DOB">
                  <div class="col">
                      <label for="month" class="form-label"></label> <input class="form-control form-control-lg" id="month" placeholder="Month">
-                     <span class="invalid message"></span>
+                     <span>Must be <=current month</span>
                  </div>
                 <div class="col">
                     <label for="day" class="form-label"></label> <input class="form-control form-control-lg" id="day" placeholder="Day">
-                    <span class="invalid message"></span>
+                    <span>Must be <=current day</span>
                 </div>
                 <div class="col">
                     <label for="year" class="form-label"></label> <input class="form-control form-control-lg" id="year" placeholder="Year">
-                    <span class="invalid message"></span>
+                    <span>Must be <=current year</span>
                 </div>
             </div>
 
             <br>
-            <div class="col-12">
-                <button class="btn btn-primary" type="submit">Finish</button>
-            </div>
         </div>
 
     </form>
+
+    <div class="mx-auto p-2" style="width: 40%;">
+        <button class="btn btn-primary" onclick="verifyForm()">Finish</button>
+    </div>
 
     <div class="mx-auto p-2" style="width: 40%;">
         <div id="accountInfo"></div>
@@ -93,148 +93,111 @@
     <script>
         //verify first name
         const firstName = document.getElementById("fname");
-        firstName.addEventListener("change", verifyFname);
         function verifyFname(){
-            const span = firstName.nextElementSibling;
-            const fnameFormat = /^[A-Za-z]{1,20}$/;
-            if(!fnameFormat.test(firstName.value)){
-                span.style.color = "red";
-                span.innerHTML = "Must be alphabetic characters length between 1-20";
+            if(firstName.value === "")
                 return false;
-            }
-            else{
-                span.style.color = "green";
-                span.innerHTML = "Valid";
+            else
                 return true;
-            }
         }
 
         //verify last name
         const lastName = document.getElementById("lname");
-        lastName.addEventListener("change", verifyLname);
         function verifyLname(){
-            const span = lastName.nextElementSibling;
-            const lnameFormat = /^[A-Za-z]{1,20}$/;
-            if(!lnameFormat.test(lastName.value)){
-                span.style.color = "red";
-                span.innerHTML = "Must be alphabetic characters length between 1-20";
+            if(lastName.value === "")
                 return false;
-            }
-            else{
-                span.style.color = "green";
-                span.innerHTML = "Valid";
+            else
                 return true;
-            }
         }
 
         //verify email
         const email = document.getElementById("email");
-        email.addEventListener("change", verifyEmail);
         function verifyEmail(){
-            const span = email.nextElementSibling;
-            const emailFormat = /^.{1,20}@.{1,10}\.com$/;
-            if(!emailFormat.test(email.value)){
-                span.style.color = "red";
-                span.innerHTML = "Invalid Format";
+            if(email.value === "")
                 return false;
-            }
-            else{
-                span.style.color = "green";
-                span.innerHTML = "Valid";
+            else
                 return true;
-            }
         }
 
         //verify password
         const password = document.getElementById("password");
-        password.addEventListener("change", verifyPassword);
         function verifyPassword(){
-            const span = password.nextElementSibling;
-            const passwordFormat = /[!?]/;
-            if(!passwordFormat.test(password.value)){
-                span.style.color = "red";
-                span.innerHTML = "at least one '?' or '!'";
-                return false;
+            for(i = 0; i < password.value.length; i++){
+                if(password.value.charAt(i) == "?" || password.value.charAt(i) == "!")
+                    return true;
             }
-            else{
-                span.style.color = "green";
-                span.innerHTML = "Valid";
-                return true;
-            }
+            return false;
         }
 
         //verify month
         const month = document.getElementById("month");
-        month.addEventListener("change", verifyMonth);
         function verifyMonth(){
-            const span = month.nextElementSibling;
-            if(month.value >= 1 && month.value <= 12){
-                span.style.color = "green";
-                span.innerHTML = "Valid";
-                return true;
-            }
-            else{
-                span.style.color = "red";
-                span.innerHTML = "Invalid";
+            if(month.value === "" || month.value < 1 || month.value > 12) {
                 return false;
             }
+            else
+                return true;
         }
 
         //verify day
         const day = document.getElementById("day");
-        day.addEventListener("change", verifyDay);
         function verifyDay(){
-            const span = day.nextElementSibling;
-            if(day.value >= 1 && day.value <= 31){
-                span.style.color = "green";
-                span.innerHTML = "Valid";
-                return true;
+            const currentDay = new Date().getDay();
+            if(day.value === "" || day.value < 1 || day.value > 31){
+                return false;
             }
             else{
-                span.style.color = "red";
-                span.innerHTML = "Invalid";
-                return false;
+                return true;
             }
         }
 
         //verify year
         const year = document.getElementById("year");
-        year.addEventListener("change", verifyYear);
         function verifyYear(){
-            const span = year.nextElementSibling;
             const currentYear = new Date().getFullYear();
-            if(year.value >= 1000 && year.value <= currentYear){
-                span.style.color = "green";
-                span.innerHTML = "Valid";
-                return true;
+            if(year.value === "" || year.value > currentYear){
+                return false;
             }
             else{
-                span.style.color = "red";
-                span.innerHTML = "Invalid";
-                return false;
+                return true;
             }
         }
 
-        //verify submission
-        const form = document.getElementById("RegistrationForm");
-        form.addEventListener("submit", function (e){
-            if(!verifyFname()) e.preventDefault();
-            if(!verifyLname()) e.preventDefault();
-            if(!verifyEmail()) e.preventDefault();
-            if(!verifyPassword()) e.preventDefault();
-            if(!verifyMonth()) e.preventDefault();
-            if(!verifyDay()) e.preventDefault();
-            if(!verifyYear()) e.preventDefault();
+        //verify Form
+        function verifyForm(){
+            const form = document.getElementById("RegistrationForm");
 
-            if(verifyFname() && verifyLname() && verifyEmail() && verifyPassword() && verifyMonth() && verifyDay() && verifyYear()){
-                e.preventDefault();
+            let failString = "Invalid: ";
+            if(!verifyFname())
+                failString += "First name, ";
+            if(!verifyLname())
+                failString += "Last name, ";
+            if(!verifyEmail())
+                failString += "Email, ";
+            if(!verifyPassword())
+                failString += "Password, ";
+            if(!verifyMonth())
+                failString += "Month, ";
+            if(!verifyDay())
+                failString += "Day, ";
+            if(!verifyYear())
+                failString += "Year, ";
+
+            if(!verifyFname() || !verifyLname() || !verifyEmail() || !verifyPassword() || !verifyMonth() || !verifyDay() || !verifyYear()){
+                alert("Registration Fail. Reason: " + failString);
+            }
+            else{
+
                 alert("Registration Succeed!");
+
+                let displayPW = "";
+                for(i=0; i<password.value.length; i++)
+                    displayPW += "*";
 
                 const User = {
                     firstname: firstName.value,
                     lastname: lastName.value,
                     Email: email.value,
-                    Password: password.value,
+                    Password: displayPW,
                     Month: month.value,
                     Day: day.value,
                     Year: year.value
@@ -247,8 +210,13 @@
                     "Email: " + User.Email + "<br>" +
                     "Password: " + User.Password + "<br>" +
                     "Date of Birth: " + User.Month + "/" + User.Day + "/" + User.Year;
+
             }
-        })
+
+
+        }
+
+
 
 
 
