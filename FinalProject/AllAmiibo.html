@@ -20,7 +20,7 @@
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 40px;">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#"><h5>Home</h5></a>
+                                        <a class="nav-link" href="./HomePage.html"><h5>Home</h5></a>
                                     </li>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,25 +46,62 @@
         </div>
     </div>
 
-    <div class="container" id="AmiiboContent">
+    <hr>
+
+    <div class="text-center">
+        <h2>All Amiibo</h2>
+        <br>
+    </div>
+
+    <div class="container" id="PageContent">
 
     </div>
 
     <script>
-        const url = "https://www.amiiboapi.com/api/amiibo/";
-        const options = {
-            method: 'GET',
-        };
+        async function FetchAmiibo(){
+            const url = "https://www.amiiboapi.com/api/amiibo/";
+            const options = {
+                method: 'GET',
+            };
 
-        const response = fetch(url, options);
-        const result = response.text();
-        const wholeObject = JSON.parse(result);
+            const response = await fetch(url, options);
+            const result = await response.text();
 
-        let amiiboArray = wholeObject.amiibo;
+            const wholeObject = JSON.parse(result);
 
-        const AmiiboContent = document.getElementById("AmiiboContent");
+            const amiiboArray = wholeObject.amiibo;
 
-        AmiiboContent.InnerHTML =
+            let PageContent = document.getElementById("PageContent");
+
+            let newRow;
+
+            for(let i = 0; i < amiiboArray.length; i++)
+            {
+                if(i % 4 === 0)
+                {
+                    newRow = document.createElement("div");
+                    newRow.className = "row";
+                    PageContent.appendChild(newRow);
+
+                    newBreakLine = document.createElement("br");
+                    PageContent.appendChild(newBreakLine);
+                }
+                let amiiboImage = amiiboArray[i].image;
+                let amiiboName = amiiboArray[i].name;
+                newRow.insertAdjacentHTML("beforeend", `
+                    <div class="col-3">
+                        <div class="img-thumbnail text-center h-100">
+                            <img src="${amiiboImage}" alt="${amiiboName}" height="200px" ">
+                            <hr>
+                            <h3>${amiiboName}</h3>
+                        </div>
+                    </div>
+                `);
+            }
+        }
+
+        FetchAmiibo();
+
     </script>
 </body>
 </html>
