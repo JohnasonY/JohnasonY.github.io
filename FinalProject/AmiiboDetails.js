@@ -18,7 +18,7 @@ async function AmiiboDetails(amiiboID){
     PageContent.className = "container d-flex justify-content-center align-items-center";
 
     PageContent.innerHTML = `
-        <div class="card h-100" style="background-color: bisque">
+        <div class="card" style="width: 18rem; background-color: bisque">
             <img src="${Amiibo.image}" class="card-img-top" alt="${Amiibo.name}">
             <div class="card-body">
                 <h5 class="card-title text-center">${Amiibo.name}</h5>
