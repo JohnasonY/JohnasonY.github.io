@@ -13,7 +13,7 @@ async function FetchAmiibo(url, heading){
 
     let PageContent = document.getElementById("PageContent");
 
-    PageContent.className = "container";
+    PageContent.className = "container text-center";
     PageContent.innerHTML = `<br>
         <h2>${heading}</h2>
         <br>
@@ -34,13 +34,17 @@ async function FetchAmiibo(url, heading){
         }
         let amiiboImage = amiiboArray[i].image;
         let amiiboName = amiiboArray[i].name;
+
+        let amiiboID = amiiboArray[i].head + amiiboArray[i].tail;
         newRow.insertAdjacentHTML("beforeend", `
                     <div class="col-3">
-                        <div class="img-thumbnail text-center h-100">
-                            <img src="${amiiboImage}" alt="${amiiboName}" height="200px" ">
-                            <hr>
-                            <h3>${amiiboName}</h3>
-                        </div>
+                        <a href="#" onclick="AmiiboDetails('${amiiboID}')">
+                            <div class="img-thumbnail text-center h-100" style="background-color: beige">
+                                <img src="${amiiboImage}" alt="${amiiboName}" height="200px" ">
+                                <hr>
+                                <h3>${amiiboName}</h3>
+                            </div>
+                        </a>
                     </div>
                 `);
     }
