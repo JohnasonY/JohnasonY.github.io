@@ -34,11 +34,13 @@ async function FetchAmiibo(url, heading){
         }
         let amiiboImage = amiiboArray[i].image;
         let amiiboName = amiiboArray[i].name;
-
         let amiiboID = amiiboArray[i].head + amiiboArray[i].tail;
+        let amiiboCharacter = amiiboArray[i].character;
+        let amiiboGameSeries = amiiboArray[i].gameSeries;
+
         newRow.insertAdjacentHTML("beforeend", `
                     <div class="col-3">
-                        <a href="#" onclick="AmiiboDetails('${amiiboID}')">
+                        <a href="#" onclick="AmiiboDetails('${amiiboID}', '${amiiboCharacter}', '${amiiboGameSeries}')">
                             <div class="img-thumbnail text-center h-100" style="background-color: beige">
                                 <img src="${amiiboImage}" alt="${amiiboName}" height="200px" ">
                                 <hr>
@@ -48,4 +50,10 @@ async function FetchAmiibo(url, heading){
                     </div>
                 `);
     }
+
+    let relatedCharacter = document.getElementById("relatedCharacter");
+    relatedCharacter.innerHTML = "";
+
+    let relatedGame = document.getElementById("relatedGame");
+    relatedGame.innerHTML = "";
 }
