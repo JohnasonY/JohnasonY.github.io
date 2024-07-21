@@ -72,4 +72,10 @@ function HomePage(){
             </div>
         </div>
     `;
+
+    let relatedCharacter = document.getElementById("relatedCharacter");
+    relatedCharacter.innerHTML = "";
+
+    let relatedGame = document.getElementById("relatedGame");
+    relatedGame.innerHTML = "";
 }
