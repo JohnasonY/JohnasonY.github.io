@@ -39,7 +39,7 @@ async function FetchAmiibo(url, heading){
         let amiiboGameSeries = amiiboArray[i].gameSeries;
 
         newRow.insertAdjacentHTML("beforeend", `
-                    <div class="col-3">
+                    <div class="col-sm-3">
                         <a href="#" onclick="AmiiboDetails('${amiiboID}', '${amiiboCharacter}', '${amiiboGameSeries}')">
                             <div class="img-thumbnail text-center h-100" style="background-color: beige">
                                 <img src="${amiiboImage}" alt="${amiiboName}" height="200px" ">
